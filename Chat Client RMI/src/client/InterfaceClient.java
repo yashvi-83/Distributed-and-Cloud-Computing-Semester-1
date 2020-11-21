@@ -1,0 +1,27 @@
+package client;
+
+import java.rmi.Remote;
+import java.rmi.RemoteException;
+import java.util.ArrayList;
+import java.util.List;
+
+
+public interface InterfaceClient extends Remote{
+    //this function to retrieve the messages of the discussion from the server
+    void retrieveMessage(String message) throws RemoteException;
+    
+    //This function to retrieve the shared files of the discussion from the server
+    void retrieveMessage(String filename,ArrayList<Integer> inc) throws RemoteException;
+    
+    //this function to send a message from a client to the server
+    void sendMessage(List<String> list) throws RemoteException;
+    
+    //this function to retrieve the name of connected clients (client identifier) ​​==> username
+    String getName()throws RemoteException;
+    
+    //this function to deactivate the functionality of sending a message to a customer
+    void closeChat(String message) throws RemoteException;
+    
+    //this function to enable a customer to send a message
+    void openChat() throws RemoteException;
+}
