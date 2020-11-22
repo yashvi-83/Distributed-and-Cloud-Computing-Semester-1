@@ -55,18 +55,12 @@ public class ChatView extends JFrame implements Runnable{
     private GroupLayout groupLayout;
     
     
-    public ChatView(String name,String autorization,InterfaceServer server) {
+    public ChatView(String name,InterfaceServer server) {
     	getContentPane().setBackground(new Color(255, 222, 173));
         initComponents();
         
         this.server = server;
         this.name = name;
-        
-    
-        if(autorization.equals("Administrator")){
-            System.out.print(autorization);
-            listConnect.setComponentPopupMenu(jPopupMenu1);
-        }
         
         this.setLocationRelativeTo(null);
         this.setTitle("Chat (" + name + ")");
@@ -75,7 +69,6 @@ public class ChatView extends JFrame implements Runnable{
         groupLayout = new GroupLayout(jPanel1);
         jPanel1.setLayout(new GridLayout(100,1));
         jPanel1.setBorder(new EmptyBorder(5, 10, 10, 10));
-        
     
         this.addWindowListener(new java.awt.event.WindowAdapter() {    
             @Override
@@ -150,8 +143,6 @@ public class ChatView extends JFrame implements Runnable{
         minuteur.schedule(tache,0,20000);
     }
     
-
-    
     @SuppressWarnings("unchecked")
     
     private void initComponents() {
@@ -206,7 +197,7 @@ public class ChatView extends JFrame implements Runnable{
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setResizable(false);
 
-        listConnect.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        listConnect.setFont(new java.awt.Font("Dialog", 0, 14)); 
         listConnect.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
@@ -232,12 +223,12 @@ public class ChatView extends JFrame implements Runnable{
 
         listMessage.setEditable(false);
         listMessage.setColumns(20);
-        listMessage.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        listMessage.setFont(new java.awt.Font("Dialog", 1, 12));
         listMessage.setRows(5);
         listMessage.setRequestFocusEnabled(false);
         jScrollPane3.setViewportView(listMessage);
 
-        jLabel2.setFont(new Font("Comic Sans MS", Font.BOLD, 16)); // NOI18N
+        jLabel2.setFont(new Font("Comic Sans MS", Font.BOLD, 16)); 
         jLabel2.setText("Onlline Clients :");
 
         jButton1.setText("Refresh");
@@ -250,7 +241,7 @@ public class ChatView extends JFrame implements Runnable{
         });
 
 
-        jPanel1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jPanel1.setFont(new java.awt.Font("Dialog", 0, 14)); 
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -477,7 +468,6 @@ public class ChatView extends JFrame implements Runnable{
     @Override
     public void run() {
         try {
-            //System.out.println(server.getListClientByName(nom+3).size());
             model.clear();
             listClients = server.getListClientByName(name);
             int i=0;
