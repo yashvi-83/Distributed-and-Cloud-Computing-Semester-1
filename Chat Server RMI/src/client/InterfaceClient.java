@@ -6,21 +6,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public interface InterfaceClient extends Remote{
-    //cette fonction pour recuperer les messages de la discuttions a partir de server
+	//this function to retrieve the messages of the discussion from the server
     void retrieveMessage(String message) throws RemoteException;
     
-    //cette fonction pour recuperer les fichiers partagées de la discussion a partir de server
+    //This function to retrieve the shared files of the discussion from the server
     void retrieveMessage(String filename,ArrayList<Integer> inc) throws RemoteException;
     
-    //cette fonction pour envoyer un message a partir d'un client vers le serveur
+    //this function to send a message from a client to the server
     void sendMessage(List<String> list) throws RemoteException;
     
-    //cette fonction pour recuperer le nom des clients connectes (identificateur des clients) ==> username
+    //this function to retrieve the name of connected clients (client identifier)â€¹==> username
     String getName()throws RemoteException;
     
-    //cette fonction pour desactiver a un client la fonctionnalité d'envoyer un message
+    //this function to deactivate the functionality of sending a message to a customer
     void closeChat(String message) throws RemoteException;
     
-    //cette fonction pour activer a un client la fonctionnalité d'envoyer un message
+    //this function to enable a customer to send a message
     void openChat() throws RemoteException;
 }
