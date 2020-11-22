@@ -39,7 +39,7 @@ public class LoginView extends javax.swing.JFrame {
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("login.png")));
 
         try {
-            server = (InterfaceServer) Naming.lookup("rmi://192.168.100.186:4321/remote");
+            server = (InterfaceServer) Naming.lookup("rmi://192.168.100.98:4321/remote");
         } catch (NotBoundException | MalformedURLException | RemoteException ex) {
             System.out.println("Error: " + ex.getMessage());
         }
@@ -55,13 +55,12 @@ public class LoginView extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(SwingConstants.CENTER);
         jLabel2 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Log in");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
-        jButton1.setFont(new Font("Comic Sans MS", Font.BOLD, 15)); // NOI18N
+        jButton1.setFont(new Font("Comic Sans MS", Font.BOLD, 15)); 
         jButton1.setText("Login");
         jButton1.setToolTipText("");
         jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -71,22 +70,9 @@ public class LoginView extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setFont(new Font("Comic Sans MS", Font.BOLD, 14)); // NOI18N
+        jLabel1.setFont(new Font("Comic Sans MS", Font.BOLD, 14));
         jLabel1.setText("Username :");
 
-        jLabel2.setFont(new Font("Comic Sans MS", Font.BOLD, 14)); // NOI18N
-        jLabel2.setText("Authorization :");
-        jLabel2.setToolTipText("");
-
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
-            }
-        });
-
-        jComboBox1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Simple User", "Administrator" }));
-        
         JPanel panel = new JPanel();
         panel.setForeground(new Color(255, 255, 255));
         panel.setBorder(new LineBorder(new Color(0, 0, 255), 3));
@@ -98,32 +84,29 @@ public class LoginView extends javax.swing.JFrame {
         		.addGroup(layout.createSequentialGroup()
         			.addGroup(layout.createParallelGroup(Alignment.LEADING)
         				.addGroup(layout.createSequentialGroup()
-        					.addGap(52)
+        					.addContainerGap()
         					.addGroup(layout.createParallelGroup(Alignment.TRAILING)
         						.addComponent(jLabel2)
-        						.addComponent(jLabel1))
+        						.addComponent(jLabel1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         					.addPreferredGap(ComponentPlacement.RELATED)
-        					.addGroup(layout.createParallelGroup(Alignment.LEADING)
-        						.addComponent(jTextField1, 116, 116, 116)
-        						.addComponent(jComboBox1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+        					.addComponent(jTextField1, 116, 116, 116)
+        					.addPreferredGap(ComponentPlacement.RELATED))
         				.addGroup(layout.createSequentialGroup()
         					.addGap(124)
         					.addComponent(jButton1, GroupLayout.PREFERRED_SIZE, 92, GroupLayout.PREFERRED_SIZE)))
-        			.addContainerGap(57, Short.MAX_VALUE))
+        			.addGap(70))
         		.addComponent(panel, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
         	layout.createParallelGroup(Alignment.LEADING)
         		.addGroup(layout.createSequentialGroup()
         			.addComponent(panel, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)
-        			.addPreferredGap(ComponentPlacement.RELATED)
-        			.addGroup(layout.createParallelGroup(Alignment.BASELINE)
-        				.addComponent(jTextField1, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
-        				.addComponent(jLabel1))
-        			.addPreferredGap(ComponentPlacement.UNRELATED)
-        			.addGroup(layout.createParallelGroup(Alignment.BASELINE)
+        			.addGap(23)
+        			.addGroup(layout.createParallelGroup(Alignment.TRAILING)
         				.addComponent(jLabel2)
-        				.addComponent(jComboBox1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        				.addGroup(layout.createParallelGroup(Alignment.BASELINE)
+        					.addComponent(jLabel1)
+        					.addComponent(jTextField1, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)))
         			.addPreferredGap(ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
         			.addComponent(jButton1)
         			.addGap(20))
@@ -158,7 +141,7 @@ public class LoginView extends javax.swing.JFrame {
         try {
             if(!server.checkUsername(jTextField1.getText())){
                 if(!jTextField1.getText().equals("") && !jTextField1.getText().contains(" ")){
-                    new ChatView(jTextField1.getText(),(String)jComboBox1.getSelectedItem(),server).setVisible(true);
+                    new ChatView(jTextField1.getText(),server).setVisible(true);
                     this.dispose();
                 }
             }else{
@@ -194,7 +177,6 @@ public class LoginView extends javax.swing.JFrame {
 
    
     private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JTextField jTextField1;
