@@ -11,17 +11,17 @@ import java.util.Vector;
 
 
 public class ChatServer extends UnicastRemoteObject implements InterfaceServer{
-    private final ArrayList<InterfaceClient> clients; //liste contient tous les clients mais qui ne sont pas bloqué 
-    private final ArrayList<InterfaceClient> blockedClients; //liste contient tous les clients bloqués
+    private final ArrayList<InterfaceClient> clients; //list of connected clients 
+    private final ArrayList<InterfaceClient> blockedClients; //list of blocked clients
     
-    //constructeur
+    //constructor
     public ChatServer() throws RemoteException{
         super();
         this.clients = new ArrayList<>();
         blockedClients = new ArrayList<>();
     }
     
-    //cette fonction pour distribuer le message vers tous les clients connectes, ou une a liste presicé par le client (disscution privée)
+    //Function to broadcast message to all connected clients or direct message to particular client
     @Override
     public synchronized void broadcastMessage(String message,List<String> list) throws RemoteException {
         if(list.isEmpty()){
@@ -40,7 +40,7 @@ public class ChatServer extends UnicastRemoteObject implements InterfaceServer{
         }
     }
     
-    //cette fonction pour distribuer un fichier vers tous les clients connectes, ou une a liste presicé par le client (disscution privée)
+    //Function to broadcast message to all connected clients or direct message to particular client
     @Override
     public synchronized void broadcastMessage(ArrayList<Integer> inc, List<String> list,String filename) throws RemoteException {
         if(list.isEmpty()){
@@ -59,13 +59,13 @@ public class ChatServer extends UnicastRemoteObject implements InterfaceServer{
         }
     }
         
-    //cette fonction pour ajouter un client connectes a la liste des clients sur le serveur
+    //Function to add new client to list of clients on server
     @Override
     public synchronized void addClient(InterfaceClient client) throws RemoteException {
         this.clients.add(client);
     }
     
-    //cette fonction pour recupere le nom des clients connectes
+    //Function to get connected clients' names
     @Override
     public synchronized Vector<String> getListClientByName(String name) throws RemoteException {
         Vector<String> list = new Vector<>();
@@ -77,7 +77,7 @@ public class ChatServer extends UnicastRemoteObject implements InterfaceServer{
         return list;
     }
     
-    //cette fonction pour blocker un client d"envoyer un message, mais il peut recu les messages
+    //Function to block a client from sending message, but can receive messages
     @Override
     public synchronized void blockClient(List<String> clients){
         for(int j=0;j<this.clients.size();j++){
@@ -94,7 +94,7 @@ public class ChatServer extends UnicastRemoteObject implements InterfaceServer{
         }
     }
     
-    //cette fonction pour supprimer totalement une liste des clients de chat (kick-out)
+    //Function to remove a list of clients
     @Override
     public synchronized void removeClient(List<String> clients){
         for(int j=0;j<this.clients.size();j++){
@@ -111,7 +111,7 @@ public class ChatServer extends UnicastRemoteObject implements InterfaceServer{
         }
     }
     
-    //cette fonction pour supprimer totalement un seul client de chat (kick-out)
+    //Function to remove one client only
     @Override
     public synchronized void removeClient(String clients){
         for(int j=0;j<this.clients.size();j++){
@@ -125,7 +125,7 @@ public class ChatServer extends UnicastRemoteObject implements InterfaceServer{
         }
     }
 
-    //cette fonction pour activer un client dans chat, d'apres etre dans le cas de "block"
+    //Function to activate a client after being "blocked"
     @Override
     public synchronized void reactiveClient(List<String> clients) throws RemoteException {
         for(int j=0;j<this.blockedClients.size();j++){
@@ -141,7 +141,7 @@ public class ChatServer extends UnicastRemoteObject implements InterfaceServer{
             }
         }
     }
-    //cette fonction pour verfifier est que un username existe deja dans le serveur ou non, car username est l'identificateur sur chat
+    //Function to check if a username already exists on the server
     @Override
     public boolean checkUsername(String username) throws RemoteException {
         boolean exist = false;
