@@ -2,7 +2,6 @@ package client;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
-import java.util.ArrayList;
 import java.util.List;
 
 public interface InterfaceClient extends Remote{
@@ -10,7 +9,7 @@ public interface InterfaceClient extends Remote{
     void retrieveMessage(String message) throws RemoteException;
     
     //This function to retrieve the shared files of the discussion from the server
-    void retrieveMessage(String filename,ArrayList<Integer> inc) throws RemoteException;
+    void retrieveMessage(int i,String message) throws RemoteException;
     
     //this function to send a message from a client to the server
     void sendMessage(List<String> list) throws RemoteException;
