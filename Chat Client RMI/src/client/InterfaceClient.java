@@ -8,15 +8,14 @@ import java.util.List;
 
 public interface InterfaceClient extends Remote{
     //this function to retrieve the messages of the discussion from the server
-    void retrieveMessage(String message) throws RemoteException;
+    void retrieveMessage(int i, String message) throws RemoteException;
     
-    //This function to retrieve the shared files of the discussion from the server
-    void retrieveMessage(String filename,ArrayList<Integer> inc) throws RemoteException;
+   
     
     //this function to send a message from a client to the server
     void sendMessage(List<String> list) throws RemoteException;
     
-    //this function to retrieve the name of connected clients (client identifier) ​​==> username
+    //this function to retrieve the name of connected clients (client identifier) â€‹â€‹==> username
     String getName()throws RemoteException;
     
     //this function to deactivate the functionality of sending a message to a customer
