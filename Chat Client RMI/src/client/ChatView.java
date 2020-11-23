@@ -77,12 +77,7 @@ public class ChatView extends JFrame implements Runnable{
                     "Are you sure you want to close this chat ?", "Close chat?", 
                     JOptionPane.YES_NO_OPTION,
                     JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION){
-                    try {
-                        server.removeClient(name);
-                    } catch (RemoteException ex) {
-                        System.out.println("Error: " + ex.getMessage());
-                    }
-                    System.exit(0);
+
                 }else{
                    
                 }
@@ -171,27 +166,15 @@ public class ChatView extends JFrame implements Runnable{
 
         jMenuItem1.setText("Remove Users");
         jMenuItem1.setActionCommand("");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
-            }
-        });
+
         jPopupMenu1.add(jMenuItem1);
 
         jMenuItem2.setText("Block Users");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
-            }
-        });
+
         jPopupMenu1.add(jMenuItem2);
 
         jMenuItem3.setText("Reactive Users");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
-            }
-        });
+
         jPopupMenu1.add(jMenuItem3);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -413,29 +396,7 @@ public class ChatView extends JFrame implements Runnable{
         thread.start();
     }
     
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {
-        try {
-            server.removeClient(listConnect.getSelectedValuesList());
-        } catch (RemoteException ex) {
-            System.out.println("Error: " + ex.getMessage());
-        } 
-    }
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {
-        try {
-            server.blockClient(listConnect.getSelectedValuesList());
-        } catch (RemoteException ex) {
-            System.out.println("Error: " + ex.getMessage());
-        }
-    }
 
-    
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {
-        try {
-            server.reactiveClient(listConnect.getSelectedValuesList());
-        } catch (RemoteException ex) {
-            System.out.println("Error: " + ex.getMessage());
-        }
-    }
     private javax.swing.JButton btnSend;
     private javax.swing.JTextArea inputMsg;
     private javax.swing.JButton jButton1;
