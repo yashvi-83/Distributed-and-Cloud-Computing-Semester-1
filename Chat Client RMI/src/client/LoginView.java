@@ -39,7 +39,7 @@ public class LoginView extends javax.swing.JFrame {
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("login.png")));
 
         try {
-            server = (InterfaceServer) Naming.lookup("rmi://192.168.100.98:4321/remote");
+            server = (InterfaceServer) Naming.lookup("rmi://192.168.100.5:4321/remote");
         } catch (NotBoundException | MalformedURLException | RemoteException ex) {
             System.out.println("Error: " + ex.getMessage());
         }
