@@ -37,71 +37,24 @@ public class ChatClient extends UnicastRemoteObject implements InterfaceClient{
     
     
     @Override
-    public void retrieveMessage(String message) throws RemoteException {
-        output.setText(output.getText() + "\n" + message);
+    public void retrieveMessage(int type,String message) throws RemoteException {
+    	if (type ==1) {
+    		output.setText(output.getText() + "\n" + message);
+    	}
+    	else {
+    		output.setText(output.getText() + "\n" + "PM from  " + message);
+    	}
+        
     }
     
     
-    @Override
-    public void retrieveMessage(String filename, ArrayList<Integer> inc) throws RemoteException {
-        JLabel label = new JLabel("<HTML><U><font size=\"4\" color=\"#365899\">" + filename + "</font></U></HTML>");
-        label.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        label.addMouseListener(new MouseListener() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                try {
-                    FileOutputStream out;
-                    String separator;
-                    if(System.getProperty("os.name").startsWith("Linux") || System.getProperty("os.name").startsWith("MacOS")) separator = "/";
-                    else separator = "\\";
-                    out = new FileOutputStream(System.getProperty("user.home") + separator + filename);
-                    String[] extension = filename.split("\\.");
-                    for (int i = 0; i<inc.size(); i++) {
-                        int cc = inc.get(i);
-                        if(extension[extension.length - 1].equals("txt")||
-                                extension[extension.length - 1].equals("java")||
-                                extension[extension.length - 1].equals("php")||
-                                extension[extension.length - 1].equals("c")||
-                                extension[extension.length - 1].equals("cpp")||
-                                extension[extension.length - 1].equals("xml")
-                                )
-                        out.write((char)cc);
-                        else{
-                            out.write((byte)cc);
-                        }
-                    }
-                    out.flush();
-                    out.close();
-                    JOptionPane.showMessageDialog(new JFrame(),"your file saved at " + System.getProperty("user.home") + separator + filename,"File Saved",JOptionPane.INFORMATION_MESSAGE);
-                } catch (FileNotFoundException ex) {
-                    System.out.println("Error: " + ex.getMessage());
-                } catch (IOException ex) {
-                    System.out.println("Error: " + ex.getMessage());
-                }             
-            }
-
-            @Override
-            public void mousePressed(MouseEvent e) {}
-
-            @Override
-            public void mouseReleased(MouseEvent e) {}
-
-            @Override
-            public void mouseEntered(MouseEvent e) {}
-
-            @Override
-            public void mouseExited(MouseEvent e) {}
-        });
-        jpanel.add(label);
-        jpanel.repaint();
-        jpanel.revalidate();
-    }
+   
     
     
     @Override
     public void sendMessage(List<String> list) {
         try {
-            server.broadcastMessage(name + " : " + input.getText(),list);
+            server.broadcastMessage("["+ name + "]" + " : " + input.getText(),list);
         } catch (RemoteException ex) {
             System.out.println("Error: " + ex.getMessage());
         }
